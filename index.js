@@ -2,7 +2,7 @@ const mailoviIkodovi = new Map();
 const db = require("./db/db");
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 8080;
 var randomize = require('randomatic');
 const nodemailer = require("nodemailer");
 var cors = require('cors')
@@ -13,17 +13,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 app.use(cors())
 var mydate = require('current-date');
-const https = require('https');
-const fs = require('fs'); // Node.js filesystem module
-const options = {
-  key: fs.readFileSync('./https/privkey.pem'),
-  cert: fs.readFileSync('./https/cert.pem'),
-};
-
-const httpsport=443;
 
 
-const server = https.createServer(options, app);
 
 
 const smtpTransport = require('nodemailer-smtp-transport');
@@ -561,8 +552,17 @@ async function nadiPrivatneObjave(frendid,userid) {
     datum: formatDateString(obj.datum), // Format the Date property
   }));
 
+console.log("PRIVATNI EVENTI PRIJE FILTRIRANJA")
+  console.log(formattedArray)
+
+  const filteredArray = formattedArray.filter((obj)=>{
+   return parseInt(obj.kolkoljudi)>parseInt(obj.br)
+  })
+  console.log("PRIVANTI EVENTI NAKON FILTRIRANJA")
+
+  console.log(filteredArray)
   
-  return formattedArray}
+  return filteredArray}
 
   catch(err) {
 
@@ -581,9 +581,16 @@ async function nadiJavneObjave(id) {
     ...obj, // Copy all properties from the original object
     datum: formatDateString(obj.datum), // Format the Date property
   }));
+  console.log("JAVNI EVENTI PRIJE FILTIRIRANJA")
+console.log(formattedArray)
 
+const filteredArray = formattedArray.filter((obj)=>{
+ return parseInt(obj.kolkoljudi)>parseInt(obj.br)
+ })
+ console.log("JAVNI EVENTI NAKON FILTRIRANJA")
+ console.log(filteredArray)
   
-  return formattedArray 
+  return filteredArray 
 
   }
 
@@ -602,20 +609,22 @@ async function getFeed(email) {
   const values1 = [email]
   const odg=await db.query(text1,values1)
   const userid=odg.rows[0].userid
-  console.log(userid)
+  
   const text2="Select dobioId as Id from FRIENDSHIPS where posloId=$1 and status=$2 UNION Select posloId as Id from FRIENDSHIPS where dobioId=$1 and status=$2  "
   const values2=[userid,"potvrdeno"]
   const odg2=await db.query(text2,values2)
   
   const frendovi=odg2.rows
 
-  console.log(frendovi)
+  
   const objave = []
-  console.log(frendovi)
+
+  console.log("BROJ FRENDOVA JE "+frendovi.length)
+  
 for(let i  =0;i<frendovi.length;i++) {
-    nadiPrivatneObjave(frendovi[i].id,userid).then(stupci=>{console.log("privatne",stupci);for(let i = 0;i<stupci.length;i++){objave.push(stupci[i])}})
+    nadiPrivatneObjave(frendovi[i].id,userid).then(stupci=>{if(stupci) for(let i = 0;i<stupci.length;i++){objave.push(stupci[i])}})
   }
-  await nadiJavneObjave(userid).then(stupci=>{console.log("javni",stupci);for(let i = 0;i<stupci.length;i++){objave.push(stupci[i])}})
+  await nadiJavneObjave(userid).then(stupci=>{if(stupci)for(let i = 0;i<stupci.length;i++){objave.push(stupci[i])}})
   
   return objave; }
   catch(err) {
@@ -1119,9 +1128,12 @@ app.get("/detalji/:id/:email",function(req,res){
 
       try{
       console.log(body)
+      const datum = formatDateString(body.datum)
+      console.log(body.datum)
+      console.log(datum)
 
       const text="UPDATE EVENTS set vrijeme=$2 ,datum=$3,tip=$4,sport=$5,grad=$6 ,mjesto=$7,kolkoLjudi=$8  where eventId=$1;"
-      const values=[body.eventid,body.vrijeme,body.datum,body.tip,body.sport,body.grad,body.mjesto,body.brojLjudi]
+      const values=[body.eventid,body.vrijeme,datum,body.tip,body.sport,body.grad,body.mjesto,body.brojLjudi]
       
      await db.query(text,values)
       }

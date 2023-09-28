@@ -4,11 +4,10 @@ const {Pool} = require('pg');
 
 const pool = new Pool({
     user: 'postgres',
-    host: 'db',
+    host: 'terminidatabase.cyhhgrwp0mi2.eu-central-1.rds.amazonaws.com',
     database: 'Termini',
-    password: 'root',
+    password: 'Ivor22c1_2',
     port: 5432,
-
 });
 
 const sql_create_users = 
@@ -194,5 +193,6 @@ const connectToDB = async () => {
       console.log(err);
     }
   };
+
   connectToDB().then(seed());
 module.exports=pool;
