@@ -39,6 +39,11 @@ const currentDate = require("current-date");
   res.json({"staje":"mali"});
   console.log("kurcina")
 });
+
+app.get('/books2', (req, res) => {
+  res.json({"staje":"mali"});
+  console.log("kurcina")
+});
     
 //napravi terminihr gmail i napravi korake koji si morao za svoj mail https://miracleio.me/snippets/use-gmail-with-nodemailer/
 app.post("/sendEmail", function (req, res) {
