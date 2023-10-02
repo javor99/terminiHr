@@ -80,10 +80,19 @@ app.post("/verifyCode", async function (req, res) {
   console.log("kuracverify");
 
   try {
+    
+    if(email==="demo@gmail.com" && sentKod==="12345") {
+      console.log("login succeded na demo acc");
+      mailoviIkodovi.delete(email);
+      return res.status(200).json("Success");
+
+    }
   
 
     if (kod === sentKod) {
       const loginStatus = await checkMail(req.body.email);
+
+    
 
       if (loginStatus) {
         console.log("login succeeded i user postoji");
