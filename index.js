@@ -219,10 +219,7 @@ app.post("/regUser",function(req,res){
           res.json({"err":"nista ne smije bit null"})
           console.log("regUser ima null")
           return}
-      checkMail(req.body.email).then(err=>{
-        if(err){
-        console.log("regUser postojeci mail")
-        return res.status(500).json(err)}
+  
 
         else{
           checkBr(req.body.brTelefona).then(err2=>{
@@ -236,7 +233,7 @@ app.post("/regUser",function(req,res){
 
         }
       
-      })}
+      }
 
 
 
@@ -244,16 +241,7 @@ app.post("/regUser",function(req,res){
 
       }
      
-      
-    
-
-   
-
-
-
-
-
-})
+    })
 
 
 async function createEvent(body) {
