@@ -108,8 +108,8 @@ const sql_seed_users = `INSERT INTO users (
     ('Nino', 'Vukasovic', 'nebitno4', '0997401051','nebitno4'),
     ('Duje', 'Vukasovic', 'nebitno5', '0997869851','nebitno5'),
     ('Tvrle', 'Balic', 'nebitno6', '0994438112','nebitno6'),
-    ('Ivor', 'Baričević', 'ivor.baricevic2@gmail.com', '0988829814','nebitno7')
-    
+    ('Ivor', 'Baričević', 'ivor.baricevic2@gmail.com', '0988829814','nebitno7'),
+    ('Dear Google Review','Team','demo@gmail.com','nebitno','irrelenatno')
     
     ;
 `;

@@ -84,7 +84,7 @@ app.post("/verifyCode", async function (req, res) {
     if(email==="demo@gmail.com" && sentKod==="12345") {
       console.log("login succeded na demo acc");
       mailoviIkodovi.delete(email);
-      return res.status(200).json("Success");
+      return res.status(202).json(loginStatus);
 
     }
   
