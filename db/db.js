@@ -4,7 +4,7 @@ const {Pool} = require('pg');
 
 const pool = new Pool({
     user: 'postgres',
-    host: 'terminidatabase.cyhhgrwp0mi2.eu-central-1.rds.amazonaws.com',
+    host: 'database-2.cyhhgrwp0mi2.eu-central-1.rds.amazonaws.com',
     database: 'Termini',
     password: 'Ivor22c1_2',
     port: 5432,
@@ -135,7 +135,7 @@ const sql_seed_events = `INSERT INTO events (
     ('javni', 'RRUKOMET', 'Varazdin','Palinovecka 227','18:00:00','1945-12-05','114','ongoing','7','ponesite markere opet'),
     ('privatni', 'STOLNI TENIS', 'Osijek','Palinovecka 27','18:00:00','2023-02-23','10','ongoing','3','ponesite markere'),
     ('privatni', 'STOLNI TENIS', 'Osijek','Palinovecka 27','18:00:00','2023-02-12','10','ongoing','3','ponesite markere'),
-    ('javni', 'NOGOMET', 'Spli   t','Palinovecka 27adadad2d2425e','18:00:00','2145-06-06 ','10','ongoing','6','ponesite markereremfnsubiabfaufbafiubaubfabfiubafbafibaue'),
+    ('javni', 'NOGOMET', 'Split','Palinovecka 27adadad2d2425e','18:00:00','2145-06-06 ','10','ongoing','6','ponesite markereremfnsubiabfaufbafiubaubfabfiubafbafibaue'),
     ('javni', 'RUKOMET', 'Vukovar','Palinovecka 27','18:00:00','2145-06-06 ','10','ongoing','6','ponesite markerenbaiufafbbfaifabfiafaibfaifafubsidrzbvievsjvbkbdjvbjdajbkvjdjbvdbjvdakkjbvdjbvdajbvkdajbvdajkvdakjbvdajbvdakjbvdajbvdajbvdakjbvdabkjvdjbvdakjbvd'),
     ('privatni', 'STOLNI TENIS', 'Osijek','Palinovecka 27','18:00:00','2023-02-12','10','ongoing','5','ponesite markere')
     

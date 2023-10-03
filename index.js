@@ -899,10 +899,16 @@ async function getTerminiKojeOrganiziram(email) {
 
   const userid=odg.rows[0].userid
 
-  const text="Select events.datum AT TIME ZONE 'CET' as realdatum ,events.eventId as eventId,*,(select count (*) from events_lists where events_lists.idEvent=events.eventId)as br from events join users on events.organizatorId=users.userId where events.organizatorId=$1 and  (events.datum>CURRENT_DATE or (events.datum=CURRENT_DATE and events.vrijeme>CURRENT_TIME))"
+  const text2 = "Select *, CURRENT_TIME as timeboy from events where events.datum=CURRENT_DATE and events.organizatorId=$1"
+  const text="Select events.datum  as realdatum ,events.eventId as eventId,*,(select count (*) from events_lists where events_lists.idEvent=events.eventId)as br from events join users on events.organizatorId=users.userId where events.organizatorId=$1 and  (events.datum>CURRENT_DATE or (events.datum=CURRENT_DATE and events.vrijeme>CURRENT_TIME))"
   const values=[userid]
   const terminiOdg=await db.query(text,values)
   const termini=terminiOdg.rows
+
+  const testOdg = await db.query(text2,values)
+  console.log("-------------------------------------------------------------------------------------")
+  console.log(testOdg.rows)
+  console.log("--------------------------------------------------------------------------------")
 
   const formattedArray = termini.map((obj) => ({
     ...obj, // Copy all properties from the original object
