@@ -763,9 +763,9 @@ async function traziUsere(input,email) {
 
   const userid=odg2.rows[0].userid
   console.log(email)
-  var input2=input.trim()
+  var input2=input.trim().toLowerCase()
   if(!input2.includes(" ")){
-    var text="Select CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$4 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$4   ) then 'true' else 'false' end as pending ,*,CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$3 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$3)  then 'true' else 'false' end as friends from USERS where (ime LIKE $1 or prezime LIKE $1) and users.userid!=$2"
+    var text="Select CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$4 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$4   ) then 'true' else 'false' end as pending ,*,CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$3 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$3)  then 'true' else 'false' end as friends from USERS where (LOWER(ime) LIKE $1 or LOWER(prezime) LIKE $1) and users.userid!=$2"
     //or ime LIKE %$1 or ime LIKE %$1% or prezime LIKE $1% or prezimeime LIKE %$1 or prezime LIKE %$1%"
     const values=["%"+input2+"%",userid,"potvrdeno","pending"]
     const odg=await db.query(text,values)
@@ -862,6 +862,7 @@ app.get("/terminiUKojimaSudjelujem/:email",function(req,res){
 
 getTerminiUKojimaSudjelujem(req.params.email).then((termini)=>{
     console.log(termini)
+    res.setHeader('Cache-Control', 'no-store');
    res.status(200).json(termini)
   
   })
@@ -899,13 +900,14 @@ async function getTerminiKojeOrganiziram(email) {
 
   const userid=odg.rows[0].userid
 
-  const text2 = "Select *, CURRENT_TIME as timeboy from events where events.datum=CURRENT_DATE and events.organizatorId=$1"
+  //const text2 = "Select *, CURRENT_TIME as timeboy from events where events.datum=CURRENT_DATE and events.organizatorId=$1"
   const text="Select events.datum  as realdatum ,events.eventId as eventId,*,(select count (*) from events_lists where events_lists.idEvent=events.eventId)as br from events join users on events.organizatorId=users.userId where events.organizatorId=$1 and  (events.datum>CURRENT_DATE or (events.datum=CURRENT_DATE and events.vrijeme>CURRENT_TIME))"
   const values=[userid]
   const terminiOdg=await db.query(text,values)
   const termini=terminiOdg.rows
+ 
 
-  const testOdg = await db.query(text2,values)
+  //const testOdg = await db.query(text2,values)
   console.log("-------------------------------------------------------------------------------------")
   console.log(testOdg.rows)
   console.log("--------------------------------------------------------------------------------")
@@ -928,6 +930,7 @@ app.get("/terminiKojeOrganiziram/:email",function(req,res){
 
   try{
 getTerminiKojeOrganiziram(req.params.email).then((termini)=>{
+  res.setHeader('Cache-Control', 'no-store');
     console.log(termini)
    res.status(200).json(termini)
   
