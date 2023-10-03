@@ -765,7 +765,7 @@ async function traziUsere(input,email) {
   console.log(email)
   var input2=input.trim().toLowerCase()
   if(!input2.includes(" ")){
-    var text="Select CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$4 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$4   ) then 'true' else 'false' end as pending ,*,CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$3 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$3)  then 'true' else 'false' end as friends from USERS where (LOWER(ime) LIKE $1 or LOWER(prezime) LIKE $1) and users.userid!=$2"
+    var text="Select CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$4 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$4   ) then 'true' else 'false' end as pending ,*,CASE when users.userid in (select posloId from friendships where friendships.dobioId=$2 and friendships.status=$3 UNION select dobioId from friendships where friendships.posloId=$2 and friendships.status=$3)  then 'true' else 'false' end as friends from USERS where (LOWER(ime) LIKE $1 or LOWER(prezime) LIKE $1 or (  CONCAT(LOWER(ime),LOWER(prezime)) LIKE $1  )  ) and users.userid!=$2"
     //or ime LIKE %$1 or ime LIKE %$1% or prezime LIKE $1% or prezimeime LIKE %$1 or prezime LIKE %$1%"
     const values=["%"+input2+"%",userid,"potvrdeno","pending"]
     const odg=await db.query(text,values)
@@ -862,7 +862,7 @@ app.get("/terminiUKojimaSudjelujem/:email",function(req,res){
 
 getTerminiUKojimaSudjelujem(req.params.email).then((termini)=>{
     console.log(termini)
-    res.setHeader('Cache-Control', 'no-store');
+    //res.setHeader('Cache-Control', 'no-store');
    res.status(200).json(termini)
   
   })
@@ -930,7 +930,7 @@ app.get("/terminiKojeOrganiziram/:email",function(req,res){
 
   try{
 getTerminiKojeOrganiziram(req.params.email).then((termini)=>{
-  res.setHeader('Cache-Control', 'no-store');
+  //res.setHeader('Cache-Control', 'no-store');
     console.log(termini)
    res.status(200).json(termini)
   
