@@ -868,7 +868,7 @@ app.get("/terminiUKojimaSudjelujem/:email",function(req,res){
 
 getTerminiUKojimaSudjelujem(req.params.email).then((termini)=>{
     console.log(termini)
-   // res.setHeader('Cache-Control', 'no-store');
+   res.setHeader('Cache-Control', 'no-store');
    res.status(200).json(termini)
   
   })
@@ -936,7 +936,7 @@ app.get("/terminiKojeOrganiziram/:email",function(req,res){
 
   try{
 getTerminiKojeOrganiziram(req.params.email).then((termini)=>{
-    //res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Cache-Control', 'no-store');
     console.log(termini)
    res.status(200).json(termini)
   
