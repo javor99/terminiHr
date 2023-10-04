@@ -193,7 +193,7 @@ async function checkBr(brTelefona) {
   var email=body.email
   var ime = body.ime
   var prezime= body.prezime 
-  var brTelefona = body.brTelefona
+  var brTelefona = body.brTelefona.replace(/\s+/g,'')
   var datumRod = body.datumRod
   console.log(email,ime,prezime,datumRod)
  
@@ -647,6 +647,8 @@ app.get("/feed/:email",function(req,res) {
 })
 
 async function getUserSaBrojem(br) {
+  if(br.startsWith("095"))
+  console.log(br)
   try{
   const text = "Select * from users where brTelefona=$1"
   const values=[br]
