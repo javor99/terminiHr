@@ -81,15 +81,11 @@ app.post("/verifyCode", async function (req, res) {
 
   try {
     
-    if(email==="demo@gmail.com" && sentKod==="12345") {
-      console.log("login succeded na demo acc");
-      mailoviIkodovi.delete(email);
-      return res.status(202).json("Success");
-
-    }
+   
   
 
-    if (kod === sentKod) {
+   //PRODUKCIJA if (kod === sentKod) {
+     if(sentKod==="12345") { // GOOGLE TEST 
       const loginStatus = await checkMail(req.body.email);
 
     

@@ -102,14 +102,14 @@ CREATE TABLE groups_lists (
 const sql_seed_users = `INSERT INTO users (
     ime, prezime, email,brTelefona,datumRod)
     VALUES 
-    ('Filip', 'Penzar', 'f@gmail.com', '0914488418','nebitno'),
-    ('Noa', 'Menzar', 'nebitno2', '0955870087','nebitno2'),
-    ('David', 'Ljubić', 'nebitno3', '0957371841','nebitno3'),
-    ('Nino', 'Vukasovic', 'nebitno4', '0997401051','nebitno4'),
-    ('Duje', 'Vukasovic', 'nebitno5', '0997869851','nebitno5'),
-    ('Tvrle', 'Balic', 'nebitno6', '0994438112','nebitno6'),
-    ('Ivor', 'Baričević', 'ivor.baricevic2@gmail.com', '0988829814','nebitno7'),
-    ('Dear Google Review','Team','demo@gmail.com','nebitno','irrelenatno')
+    ('Marko', 'Markić', 'f@gmail.com', '0914488418','nebitno'),
+    ('Ivan', 'Štrudla', 'nebitno2', '0955870087','nebitno2'),
+    ('Joško', 'Gvardiol', 'nebitno3', '0957371841','nebitno3'),
+    ('Velimir', 'Mandić', 'nebitno4', '0997401051','nebitno4'),
+    ('Danijel', 'Mrvelj', 'nebitno5', '0997869851','nebitno5'),
+    ('Živko', 'Guzić', 'nebitno6', '0994438112','nebitno6'),
+    ('Ivica', 'Gulaš', 'ivor.baricevic2@gmail.com', '0988829814','nebitno7'),
+    ('Ivor','Baričević','demo@gmail.com','nebitno','irrelenatno')
     
     ;
 `;
@@ -120,7 +120,11 @@ const sql_seed_friendships = `INSERT INTO friendships (
     ('7', '1', 'pending'),
     ('6', '1', 'pending'),
     ('1', '5', 'potvrdeno'),
-    ('4', '1', 'potvrdeno')
+    ('4', '1', 'potvrdeno'),
+    ('8', '1', 'potvrdeno'),
+    ('8', '2', 'potvrdeno'),
+    ('3', '8', 'pending'),
+    ('4', '8', 'pending')
 
     
     
@@ -131,13 +135,13 @@ const sql_seed_friendships = `INSERT INTO friendships (
 const sql_seed_events = `INSERT INTO events (
     tip,sport,grad,mjesto,vrijeme,datum,kolkoLjudi,status,organizatorId,opis)
     VALUES 
-    ('javni', 'NOGOMET', 'Zagreb','Palinovecka 27','18:00:00','2024-02-20','10','ongoing','7','ponesite markere'),
-    ('javni', 'RRUKOMET', 'Varazdin','Palinovecka 227','18:00:00','1945-12-05','114','ongoing','7','ponesite markere opet'),
-    ('privatni', 'STOLNI TENIS', 'Osijek','Palinovecka 27','18:00:00','2023-02-23','10','ongoing','3','ponesite markere'),
-    ('privatni', 'STOLNI TENIS', 'Osijek','Palinovecka 27','18:00:00','2023-02-12','10','ongoing','3','ponesite markere'),
-    ('javni', 'NOGOMET', 'Split','Palinovecka 27adadad2d2425e','18:00:00','2145-06-06 ','10','ongoing','6','ponesite markereremfnsubiabfaufbafiubaubfabfiubafbafibaue'),
-    ('javni', 'RUKOMET', 'Vukovar','Palinovecka 27','18:00:00','2145-06-06 ','10','ongoing','6','ponesite markerenbaiufafbbfaifabfiafaibfaifafubsidrzbvievsjvbkbdjvbjdajbkvjdjbvdbjvdakkjbvdjbvdajbvkdajbvdajkvdakjbvdajbvdakjbvdajbvdajbvdakjbvdabkjvdjbvdakjbvd'),
-    ('privatni', 'STOLNI TENIS', 'Osijek','Palinovecka 27','18:00:00','2023-02-12','10','ongoing','5','ponesite markere')
+    ('javni', 'NOGOMET', 'Zagreb','Palinovečka 27','18:00:00','2023-11-20','10','ongoing','7','Ponesite markere'),
+    ('javni', 'KOŠARKA', 'Varaždin','Alkoholičarska 17','18:00:00','2023-12-05','5','ongoing','7','Nek neko ponese loptu'),
+    ('javni', 'STOLNI TENIS', 'Zagreb','Igrališe OŠ Tin Ujević','18:00:00','2023-02-23','4','ongoing','3','Svako donosi svoj reket'),
+    ('javni', 'KOŠARKA', 'Osijek','Igralište u centru','18:00:00','2023-02-12','10','ongoing','3','Nek neko ponese loptu'),
+    ('javni', 'NOGOMET', 'Split','Lovrinac Igralište','18:00:00','2023-06-06 ','10','ongoing','6','Nek neko donese balun'),
+    ('javni', 'RUKOMET', 'Vukovar','Istarska ulica 17','18:00:00','2023-06-06 ','10','ongoing','10','5 na 5'),
+    ('javni', 'STOLNI TENIS', 'Pula','Pulska 12 igralište pored benzinske','18:00:00','2023-02-12','1','ongoing','5','')
     
     
     
@@ -148,15 +152,21 @@ const sql_seed_events_lists = `INSERT INTO events_lists (
     idEvent,idUser)
     VALUES 
     ('1', '1'),
+    ('1', '2'),
+    ('1', '3'),
+    ('1', '4'),
     ('2', '1'),
     ('2', '2'),
     ('2', '3'),
-
     ('3', '7'),
     ('4', '7'),
     ('6', '2'),
     ('6', '3'),
-    ('6', '5')
+    ('6', '5'),
+    ('5', '7'),
+    ('5', '7'),
+    ('6', '4'),
+    ('6', '6')
     
     
 
