@@ -1,13 +1,18 @@
 //u seedu kreiraj tablicu user , samo email , jer ce trebat provjeravat koji mailovi postoje
 const {Pool} = require('pg');
+const fs = require("fs");
 
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'database-2.cyhhgrwp0mi2.eu-central-1.rds.amazonaws.com',
-    database: 'Termini',
-    password: 'Ivor22c1_2',
-    port: 5432,
+    user :"doadmin",
+    password: "AVNS_D2lUMcwSa3Yhl0N476U",
+    host: "db-postgresql-nyc3-78459-do-user-15014682-0.c.db.ondigitalocean.com",
+    port:25061,
+    database: "MladiGljivor",
+    sslmode:"require",
+    ssl: {
+        ca: fs.readFileSync('./certif/ca-certificate.crt').toString()
+      }
 });
 
 const sql_create_users = 
@@ -137,9 +142,9 @@ const sql_seed_events = `INSERT INTO events (
     VALUES 
     ('javni', 'NOGOMET', 'Zagreb','Palinovečka 27','18:00:00','2023-11-20','10','ongoing','7','Ponesite markere'),
     ('javni', 'KOŠARKA', 'Varaždin','Alkoholičarska 17','18:00:00','2023-12-05','5','ongoing','7','Nek neko ponese loptu'),
-    ('javni', 'STOLNI TENIS', 'Zagreb','Igrališe OŠ Tin Ujević','18:00:00','2023-02-23','4','ongoing','3','Svako donosi svoj reket'),
+    ('javni', 'STOLNI TENIS', 'Zagreb','Igrališe OŠ Tin Ujević','18:00:00','2023-11-23','4','ongoing','3','Svako donosi svoj reket'),
     ('javni', 'KOŠARKA', 'Osijek','Igralište u centru','18:00:00','2023-02-12','10','ongoing','3','Nek neko ponese loptu'),
-    ('javni', 'NOGOMET', 'Split','Lovrinac Igralište','18:00:00','2023-06-06 ','10','ongoing','6','Nek neko donese balun'),
+    ('javni', 'NOGOMET', 'Split','Lovrinac Igralište','18:00:00','2023-06-06 ','10','ongoing','8','Nek neko donese balun'),
     ('javni', 'RUKOMET', 'Vukovar','Istarska ulica 17','18:00:00','2023-06-06 ','10','ongoing','10','5 na 5'),
     ('javni', 'STOLNI TENIS', 'Pula','Pulska 12 igralište pored benzinske','18:00:00','2023-02-12','1','ongoing','5','')
     
@@ -160,6 +165,8 @@ const sql_seed_events_lists = `INSERT INTO events_lists (
     ('2', '3'),
     ('3', '7'),
     ('4', '7'),
+    ('4', '8'),
+    ('4', '1'),
     ('6', '2'),
     ('6', '3'),
     ('6', '5'),
