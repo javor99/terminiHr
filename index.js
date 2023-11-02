@@ -80,12 +80,16 @@ app.post("/verifyCode", async function (req, res) {
   console.log("kuracverify");
 
   try {
-    
+    if(email.toLowerCase()==="demo@gmail.com" && sentKod==="12345") {
+      mailoviIkodovi.delete(email);
+      return res.status(202).json("Success");
+
+    }
    
   
 
-   //PRODUKCIJA if (kod === sentKod) {
-     if(sentKod==="12345") { // GOOGLE TEST 
+    if (kod === sentKod) {
+     
       const loginStatus = await checkMail(req.body.email);
 
     
