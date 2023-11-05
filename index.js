@@ -1006,6 +1006,31 @@ catch(error) {
 
 })
 
+app.get("/deleteAcc/:email",function(req,res){
+
+  try{
+
+deleteAcc(req.params.email).then((acc)=>{
+    console.log(acc)
+   res.status(200).json(acc)
+  
+  })
+  
+  }
+catch(error) {
+
+}
+
+
+
+})
+
+async function deleteAcc(email) {
+
+  
+
+}
+
 async function getTerminiUKojimaSamSudjelovao(email) {
 
   try{

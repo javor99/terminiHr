@@ -8,8 +8,8 @@ const pool = new Pool({
     password: "AVNS_D2lUMcwSa3Yhl0N476U",
     host: "db-postgresql-nyc3-78459-do-user-15014682-0.c.db.ondigitalocean.com",
     port:25061,
-    database: "MladiGljivor",
-    sslmode:"require",
+    database: "MladiGljivor",   
+    sslmode:"require",      
     ssl: {
         ca: fs.readFileSync('./certif/ca-certificate.crt').toString()
       }
