@@ -1,14 +1,15 @@
 //u seedu kreiraj tablicu user , samo email , jer ce trebat provjeravat koji mailovi postoje
+require("dotenv").config()
 const {Pool} = require('pg');
 const fs = require("fs");
 
 
 const pool = new Pool({
-    user :"doadmin",
-    password: "AVNS_D2lUMcwSa3Yhl0N476U",
-    host: "db-postgresql-nyc3-78459-do-user-15014682-0.c.db.ondigitalocean.com",
-    port:25061,
-    database: "MladiGljivor",   
+    user :process.env.DBUSER,
+    password: process.env.DBUPASS,
+    host: process.env.DBHOST,
+    port:process.env.DBUPORT,
+    database: process.env.DBDB,   
     sslmode:"require",      
     ssl: {
         ca: fs.readFileSync('./certif/ca-certificate.crt').toString()
