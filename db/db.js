@@ -6,10 +6,10 @@ const fs = require("fs");
 
 const pool = new Pool({
     user :process.env.DBUSER,
-    password: process.env.DBUPASS,
+    password: process.env.DBPASS,
     host: process.env.DBHOST,
-    port:process.env.DBUPORT,
-    database: process.env.DBDB,   
+    port:25061,
+    database: "MladiGljivor",   
     sslmode:"require",      
     ssl: {
         ca: fs.readFileSync('./certif/ca-certificate.crt').toString()
