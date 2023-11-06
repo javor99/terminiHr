@@ -5,8 +5,8 @@ const fs = require("fs");
 
 
 const pool = new Pool({
-    user :process.env.DBUSER,
-    password: process.env.DBPASS,
+    user :"doadmin",
+    password: "AVNS_D2lUMcwSa3Yhl0N476U",
     host: "db-postgresql-nyc3-78459-do-user-15014682-0.c.db.ondigitalocean.com",
     port:25061,
     database: "MladiGljivor",   
